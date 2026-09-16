@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lixo Certo - Lixeira Inteligente para Escolas. Ensine crianças a reciclar corretamente com tecnologia de sensores que só abre a tampa para o lixo certo.">
+    <title>Lixo Certo - Lixeira Inteligente para Escolas | Educação Ambiental com Tecnologia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="logo" aria-label="Lixo Certo - Página Inicial">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <circle cx="16" cy="16" r="14" fill="#5276B8"/>
+                    <path d="M16 8V16L20 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 16L12 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 16L16 24" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Lixo Certo</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#features" class="nav-link">Funcionalidades</a>
+                <a href="#how-it-works" class="nav-link">Como Funciona</a>
+                <a href="#benefits" class="nav-link">Benefícios</a>
+                <a href="#pricing" class="nav-link">Planos</a>
+                <a href="#contact" class="nav-link">Contato</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-outline">Falar com Especialista</a>
+                <a href="#contact" class="btn btn-primary">Solicitar Orçamento</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu" aria-expanded="false">
+                <i data-lucide="menu" class="icon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container hero-grid">
+                <div class="hero-content">
+
+                    <h1 id="hero-title" class="hero-title">
+                        A Lixeira que <span class="highlight">Ensina</span> a Reciclar
+                    </h1>
+                    <p class="hero-subtitle">
+                        Lixeiras inteligentes com sensores que só abrem para o resíduo correto.
+                        Transforme a coleta seletiva em uma experiência educativa e divertida para crianças.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">87%</span>
+                            <span class="stat-label">Aumento na reciclagem correta</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Escolas atendidas</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50k+</span>
+                            <span class="stat-label">Crianças impactadas</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary btn-lg">
+                            <i data-lucide="message-square" class="icon"></i>
+                            Solicitar Demonstração Gratuita
+                        </a>
+                        <a href="#features" class="btn btn-secondary btn-lg">
+                            <i data-lucide="play-circle" class="icon"></i>
+                            Ver em Ação
+                        </a>
+                    </div>
+                    <div class="hero-trust">
+                        <p class="trust-text">Confiam na Lixo Certo:</p>
+                        <div class="trust-logos" aria-label="Instituições que confiam">
+                            <span class="trust-logo">SESI/SENAI</span>
+                            <span class="trust-logo">Rede Estadual RJ</span>
+                            <span class="trust-logo">UNICEF Brasil</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual" aria-label="Ilustração da Lixeira Inteligente Lixo Certo">
+                    <div class="product-showcase">
+                        <div class="product-ring"></div>
+                        <div class="product-ring product-ring-2"></div>
+                        <div class="bin-container">
+                            <div class="bin" id="binAnimation">
+                                <div class="bin-lid" id="binLid"></div>
+                                <div class="bin-body">
+                                    <div class="sensor-area">
+                                        <div class="sensor"></div>
+                                        <div class="sensor-light" id="sensorLight"></div>
+                                    </div>
+                                    <div class="bin-colors">
+                                        <div class="color-strip blue" data-waste="plástico"></div>
+                                        <div class="color-strip green" data-waste="orgânico"></div>
+                                        <div class="color-strip yellow" data-waste="papel"></div>
+                                        <div class="color-strip red" data-waste="metal"></div>
+                                    </div>
+                                    <div class="bin-label">
+                                        <i data-lucide="recycle" class="icon"></i>
+                                        <span>Lixo Certo</span>
+                                    </div>
+                                </div>
+                                <div class="bin-base"></div>
+                            </div>
+                            <div class="waste-demo" id="wasteDemo">
+                                <div class="waste-item plastic" data-type="plástico" draggable="true">
+                                    <i data-lucide="package" class="icon"></i>
+                                    <span>Garrafa PET</span>
+                                </div>
+                                <div class="waste-item organic" data-type="orgânico" draggable="true">
+                                    <i data-lucide="apple" class="icon"></i>
+                                    <span>Casca de Banana</span>
+                                </div>
+                                <div class="waste-item paper" data-type="papel" draggable="true">
+                                    <i data-lucide="file-text" class="icon"></i>
+                                    <span>Papel</span>
+                                </div>
+                                <div class="waste-item metal" data-type="metal" draggable="true">
+                                    <i data-lucide="can" class="icon"></i>
+                                    <span>Lata Alumínio</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="demo-hint">
+                            <i data-lucide="mouse-pointer-2" class="icon"></i>
+                            <span>Arraste um item para a lixeira</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features" aria-labelledby="features-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Tecnologia Patenteada</span>
+                    <h2 id="features-title" class="section-title">Por que a Lixo Certo é Única</h2>
+                    <p class="section-subtitle">Desenvolvida com pedagogos e engenheiros para maximizar o aprendizado</p>
+                </header>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="cpu" class="icon"></i>
+                        </div>
+                        <h3 class="feature-title">Sensor Inteligente de Identificação</h3>
+                        <p class="feature-desc">Tecnologia NIR (Infravermelho Próximo) identifica o material em milissegundos. Só abre para o resíduo correto, impedindo contaminação cruzada.</p>
+                        <ul class="feature-specs">
+                            <li><i data-lucide="check" class="icon-xs"></i> Precisão de 99,2%</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Tempo de resposta < 200ms</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Funciona offline</li>
+                        </ul>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="lightbulb" class="icon"></i>
+                        </div>
+                        <h3 class="feature-title">Feedback Educativo Imediato</h3>
+                        <p class="feature-desc">Luzes LED coloridas, sons suaves e mensagens na tela explicam por que o item foi aceito ou rejeitado. Transforma erro em aprendizado.</p>
+                        <ul class="feature-specs">
+                            <li><i data-lucide="check" class="icon-xs"></i> Audio em português/libras</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Gamificação integrada</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Relatórios para professores</li>
+                        </ul>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="shield" class="icon"></i>
+                        </div>
+                        <h3 class="feature-title">Segurança Escolar Certificada</h3>
+                        <p class="feature-desc">Bordas arredondadas, materiais atóxicos, sensores anti-prendimento e trava de segurança. Certificada pelo INMETRO e normas ABNT.</p>
+                        <ul class="feature-specs">
+                            <li><i data-lucide="check" class="icon-xs"></i> INMETRO certificado</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> BPA-free e atóxico</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Garantia de 5 anos</li>
+                        </ul>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="battery" class="icon"></i>
+                        </div>
+                        <h3 class="feature-title">Autonomia de 12 Meses</h3>
+                        <p class="feature-desc">Bateria de longa duração com painel solar opcional. Zero fiação, instalação em minutos. Indicador LED de bateria baixa na própria lixeira.</p>
+                        <ul class="feature-specs">
+                            <li><i data-lucide="check" class="icon-xs"></i> Bateria LiFePO4</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Solar opcional</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Indicador LED de bateria</li>
+                        </ul>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i data-lucide="puzzle" class="icon"></i>
+                        </div>
+                        <h3 class="feature-title">Módulos Personalizáveis</h3>
+                        <p class="feature-desc">Configure cores, tipos de resíduo, idiomas e dificuldade. Adapte para educação infantil, fundamental ou necessidades especiais.</p>
+                        <ul class="feature-specs">
+                            <li><i data-lucide="check" class="icon-xs"></i> 4 a 6 compartimentos</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Cores personalizáveis</li>
+                            <li><i data-lucide="check" class="icon-xs"></i> Modo acessibilidade</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works" aria-labelledby="how-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Simples como ABC</span>
+                    <h2 id="how-title" class="section-title">Como Funciona na Prática</h2>
+                    <p class="section-subtitle">Da instalação ao uso diário em 2 passos</p>
+                </header>
+                <div class="steps-grid">
+                    <article class="step-card">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Instalação Rápida</h3>
+                            <p class="step-desc">Entregamos, posicionamos e configuramos em até 2 horas. Sem obras, sem fiação, sem dor de cabeça. Treinamento da equipe incluso.</p>
+                            <div class="step-details">
+                                <span><i data-lucide="truck" class="icon-xs"></i> Entrega agendada</span>
+                                <span><i data-lucide="wrench" class="icon-xs"></i> Configuração no local</span>
+                                <span><i data-lucide="graduation-cap" class="icon-xs"></i> Capacitação grátis</span>
+                            </div>
+                        </div>
+                        <div class="step-visual">
+                            <i data-lucide="package" class="icon-lg"></i>
+                        </div>
+                    </article>
+                    <article class="step-card">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Uso Diário Intuitivo</h3>
+                            <p class="step-desc">Crianças se aproximam, a lixeira detecta o material, indica a cor correta e abre apenas o compartimento certo. Erro vira aprendizado na hora.</p>
+                            <div class="step-details">
+                                <span><i data-lucide="eye" class="icon-xs"></i> Detecção automática</span>
+                                <span><i data-lucide="unlock" class="icon-xs"></i> Abertura seletiva</span>
+                                <span><i data-lucide="message-circle" class="icon-xs"></i> Feedback instantâneo</span>
+                            </div>
+                        </div>
+                        <div class="step-visual">
+                            <i data-lucide="user-check" class="icon-lg"></i>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits" class="benefits" aria-labelledby="benefits-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Impacto Real</span>
+                    <h2 id="benefits-title" class="section-title">Resultados Comprovados nas Escolas</h2>
+                    <p class="section-subtitle">Dados de 200+ instituições que implementaram a Lixo Certo</p>
+                </header>
+                <div class="benefits-grid">
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <i data-lucide="trending-up" class="icon"></i>
+                        </div>
+                        <div class="benefit-metric">+87%</div>
+                        <h3 class="benefit-title">Acerto na Separação</h3>
+                        <p class="benefit-desc">Crianças aprendem na prática. Em 3 meses, a taxa de reciclagem correta salta de 34% para 87% em média.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <i data-lucide="leaf" class="icon"></i>
+                        </div>
+                        <div class="benefit-metric">-2.4t</div>
+                        <h3 class="benefit-title">Resíduo/ano/escola</h3>
+                        <p class="benefit-desc">Redução média de resíduos enviados para aterro. Equivale a 120 árvores poupadas por escola ao ano.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <i data-lucide="heart" class="icon"></i>
+                        </div>
+                        <div class="benefit-metric">94%</div>
+                        <h3 class="benefit-title">Engajamento Estudantil</h3>
+                        <p class="benefit-desc">Alunos criam "patrulhas ecológicas", competem entre turmas e levam o hábito para casa. Educação que extrapola muros.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <div class="benefit-icon">
+                            <i data-lucide="award" class="icon"></i>
+                        </div>
+                        <div class="benefit-metric">Certificação</div>
+                        <h3 class="benefit-title">Escola Sustentável</h3>
+                        <p class="benefit-desc">Atende critérios do PNUD, ODS 4, 11, 12 e 13. Gera selo "Escola Verde" reconhecido pelo MEC e secretarias.</p>
+                    </article>
+                </div>
+                <div class="case-study">
+                    <div class="case-study-content">
+                        <span class="case-tag">Caso de Sucesso</span>
+                        <h3>Escola Municipal João Silva - Rio de Janeiro/RJ</h3>
+                        <p>"Em 6 meses reduzimos 68% do lixo reciclável indo para o aterro. As crianças viraram fiscais em casa. A lixeira ensina na prática e o resultado aparece no dia a dia."</p>
+                        <div class="case-author">
+                            <div class="author-avatar">MP</div>
+                            <div class="author-info">
+                                <span class="author-name">Maria Paula Santos</span>
+                                <span class="author-role">Diretora Pedagógica</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison" aria-labelledby="comparison-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Comparativo</span>
+                    <h2 id="comparison-title" class="section-title">Lixo Certo vs. Lixeiras Comuns</h2>
+                </header>
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>Lixeiras Coloridas Comuns</th>
+                                <th class="highlight-col">Lixo Certo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i data-lucide="lock" class="icon-xs"></i> Impede contaminação cruzada</td>
+                                <td><i data-lucide="x" class="icon-xs icon-x"></i> Não</td>
+                                <td class="highlight-col"><i data-lucide="check" class="icon-xs icon-check"></i> Sim</td>
+                            </tr>
+                            <tr>
+                                <td><i data-lucide="brain" class="icon-xs"></i> Ensina ativamente</td>
+                                <td><i data-lucide="x" class="icon-xs icon-x"></i> Passiva</td>
+                                <td class="highlight-col"><i data-lucide="check" class="icon-xs icon-check"></i> Ativa</td>
+                            </tr>
+                            <tr>
+                                <td><i data-lucide="shield" class="icon-xs"></i> Certificação INMETRO escolar</td>
+                                <td><i data-lucide="x" class="icon-xs icon-x"></i> Raro</td>
+                                <td class="highlight-col"><i data-lucide="check" class="icon-xs icon-check"></i> Certificada</td>
+                            </tr>
+                            <tr>
+                                <td><i data-lucide="puzzle" class="icon-xs"></i> Personalizável por idade</td>
+                                <td><i data-lucide="x" class="icon-xs icon-x"></i> Fixo</td>
+                                <td class="highlight-col"><i data-lucide="check" class="icon-xs icon-check"></i> Totalmente</td>
+                            </tr>
+                            <tr>
+                                <td><i data-lucide="tool" class="icon-xs"></i> Indicador de bateria baixa</td>
+                                <td><i data-lucide="x" class="icon-xs icon-x"></i> Não</td>
+                                <td class="highlight-col"><i data-lucide="check" class="icon-xs icon-check"></i> LED integrado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+<section id="pricing" class="pricing" aria-labelledby="pricing-title">
+                <div class="container">
+                    <header class="section-header">
+                        <span class="section-tag">Investimento Único</span>
+                        <h2 id="pricing-title" class="section-title">Compra Definitiva - Sem Mensalidades</h2>
+                        <p class="section-subtitle">Você compra, a lixeira é sua para sempre. Inclui instalação, treinamento e garantia.</p>
+                    </header>
+                    <div class="pricing-grid" id="pricingGrid">
+                        <article class="pricing-card" data-price="815">
+                            <div class="pricing-header">
+                                <h3 class="plan-name">Essencial</h3>
+                                <p class="plan-desc">Ideal para escolas pequenas (até 300 alunos)</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">R$</span>
+                                <span class="amount">815</span>
+                                <span class="period">à vista</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i data-lucide="check" class="icon-xs"></i> 2 Lixeiras Inteligentes (4 cores)</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Instalação + Treinamento Presencial</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Suporte WhatsApp (comercial)</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Garantia 3 anos</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Kit Pedagógico Básico</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline btn-block">Solicitar Orçamento</a>
+                        </article>
+                        <article class="pricing-card popular" data-price="1630">
+                            <div class="popular-badge">Mais Escolhido</div>
+                            <div class="pricing-header">
+                                <h3 class="plan-name">Complete</h3>
+                                <p class="plan-desc">Para escolas médias (300-800 alunos)</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">R$</span>
+                                <span class="amount">1.630</span>
+                                <span class="period">à vista</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i data-lucide="check" class="icon-xs"></i> 4 Lixeiras Inteligentes (6 cores)</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Instalação + Treinamento Avançado</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Suporte Prioritário 24/7</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Garantia 5 anos</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Kit Pedagógico Completo</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary btn-block">Solicitar Orçamento</a>
+                        </article>
+                        <article class="pricing-card" data-price="3800">
+                            <div class="pricing-header">
+                                <h3 class="plan-name">Enterprise</h3>
+                                <p class="plan-desc">Redes de ensino e grandes instituições (10+ lixeiras)</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">R$</span>
+                                <span class="amount">3.800</span>
+                                <span class="period">à vista</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i data-lucide="check" class="icon-xs"></i> 10 Lixeiras Inteligentes (expansível)</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Instalação em lote + CS Dedicado</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> SLA 4h + Treinamento EAD</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Garantia Estendida + Seguro</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Kit Pedagógico Personalizado</li>
+                                <li><i data-lucide="check" class="icon-xs"></i> Suporte LGPD Incluso</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline btn-block">Falar com Executivo</a>
+                        </article>
+                    </div>
+                    <p class="pricing-note">* Preços à vista com frete, instalação e primeira calibração inclusos. Parcelamento em até 12x sem juros via BNDES/FINEP. Lixeiras adicionais: R$ 380/unidade.</p>
+                </div>
+            </section>
+
+        <section class="faq" aria-labelledby="faq-title">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">Dúvidas Frequentes</span>
+                    <h2 id="faq-title" class="section-title">Perguntas que Gestores Fazem</h2>
+                </header>
+                <div class="faq-grid">
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>A lixeira precisa de internet para funcionar?</span>
+                            <i data-lucide="chevron-down" class="icon"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Não. A lixeira funciona 100% offline. Não há necessidade de internet, Wi-Fi ou aplicativos. Todo o processamento acontece localmente no sensor.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Qual a durabilidade em ambiente escolar intenso?</span>
+                            <i data-lucide="chevron-down" class="icon"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Testada para 500.000 ciclos de abertura (equivalente a 10+ anos em escola de 500 alunos). Estrutura em ABS reforçado com fibra de vidro, dobradiças de aço inox, vedação IP54. Garantia de 5 anos no plano Complete.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Como funciona a manutenção e trocas de bateria?</span>
+                            <i data-lucide="chevron-down" class="icon"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Bateria LiFePO4 dura 12-18 meses. A lixeira tem um LED indicador de bateria baixa que pisca quando precisa trocar. No plano Complete/Enterprise, a troca é feita por nossa equipe sem custo. No Essencial, enviamos a bateria com instruções (troca em 2 min, sem ferramentas).</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Atende crianças com necessidades especiais?</span>
+                            <i data-lucide="chevron-down" class="icon"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Sim. Modo acessibilidade inclui: altura ajustável (suportes inclusos), cores daltônicas, tempo de abertura estendido, acionamento por aproximação (sem toque). Certificada pela ABNT NBR 9050.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Como a lixeira ajuda no currículo escolar?</span>
+                            <i data-lucide="chevron-down" class="icon"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Fornecemos kit pedagógico impresso alinhado à BNCC: planos de aula (Ciências, Geografia, Matemática), projetos interdisciplinares, Olimpíada de Reciclagem entre turmas, certificados para alunos. A lixeira é a ferramenta prática; o kit pedagógico vem junto.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary class="faq-question">
+                            <span>Posso comprar em vez de alugar?</span>
+                            <i data-lucide="chevron-down" class="icon"></i>
+                        </summary>
+                        <div class="faq-answer">
+                            <p>Sim. Nosso modelo é apenas venda definitiva. Você compra uma vez, a lixeira é sua para sempre. Inclui garantia de 3 a 5 anos conforme o plano. Manutenção preventiva anual opcional (R$ 120/unidade).</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <header class="section-header" style="text-align: left; margin-bottom: 2rem;">
+                            <span class="section-tag">Vamos Começar?</span>
+                            <h2 id="contact-title" class="section-title">Leve a Lixo Certo para sua Escola</h2>
+                            <p class="section-subtitle">Agende uma demonstração gratuita sem compromisso. Vamos entender sua realidade e montar a proposta ideal.</p>
+                        </header>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i data-lucide="calendar" class="icon"></i>
+                                </div>
+                                <div>
+                                    <h4>Demonstração Presencial</h4>
+                                    <p>Levamos a lixeira até sua escola para teste real com alunos e professores. Duração: 2h.</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i data-lucide="video" class="icon"></i>
+                                </div>
+                                <div>
+                                    <h4>Reunião Online</h4>
+                                    <p>Apresentação completa com cases, dados e simulação de orçamento. 30-45 min.</p>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i data-lucide="phone" class="icon"></i>
+                                </div>
+                                <div>
+                                    <h4>Ligação Rápida</h4>
+                                    <p>Tire dúvidas pontuais com nosso time comercial. Segunda a sexta, 8h-18h.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-trust">
+                            <div class="trust-item">
+                                <i data-lucide="shield-check" class="icon"></i>
+                                <span>Sem compromisso de compra</span>
+                            </div>
+                            <div class="trust-item">
+                                <i data-lucide="shield-check" class="icon"></i>
+                                <span>Proposta em até 24h</span>
+                            </div>
+                            <div class="trust-item">
+                                <i data-lucide="shield-check" class="icon"></i>
+                                <span>LGPD compliant</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo *</label>
+                                <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="João da Silva">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail Institucional *</label>
+                                <input type="email" id="email" name="email" required autocomplete="email" placeholder="joao@escola.edu.br">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefone">Telefone/WhatsApp *</label>
+                                <input type="tel" id="telefone" name="telefone" required autocomplete="tel" placeholder="(11) 99999-9999">
+                            </div>
+                            <div class="form-group">
+                                <label for="cargo">Cargo/Função *</label>
+                                <select id="cargo" name="cargo" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="diretor">Diretor(a) / Gestor(a)</option>
+                                    <option value="coordenador">Coordenador(a) Pedagógico</option>
+                                    <option value="professor">Professor(a)</option>
+                                    <option value="compras">Departamento de Compras</option>
+                                    <option value="sustentabilidade">Sustentabilidade / Meio Ambiente</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="instituicao">Instituição / Rede de Ensino *</label>
+                                <input type="text" id="instituicao" name="instituicao" required placeholder="Ex: Escola Municipal, Rede Estadual SP, Colégio XYZ">
+                            </div>
+                            <div class="form-group">
+                                <label for="alunos">Nº de Alunos *</label>
+                                <select id="alunos" name="alunos" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="ate300">Até 300 alunos</option>
+                                    <option value="300-800">300 a 800 alunos</option>
+                                    <option value="800-1500">800 a 1.500 alunos</option>
+                                    <option value="1500+">Mais de 1.500 alunos</option>
+                                    <option value="rede">Rede múltiplas escolas</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem / Necessidade Específica</label>
+                            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Conte-nos sobre seu projeto, desafios atuais, prazo desejado..."></textarea>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="lgpd" name="lgpd" required>
+                            <label for="lgpd">Concordo com a <a href="#">Política de Privacidade</a> e autorizo contato comercial da Lixo Certo. *</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitBtn">
+                            <span class="btn-text">
+                                <i data-lucide="send" class="icon"></i>
+                                Solicitar Orçamento Personalizado
+                            </span>
+                            <span class="btn-loading" style="display: none;">
+                                <i data-lucide="loader" class="icon spin"></i>
+                                Enviando...
+                            </span>
+                        </button>
+                        <p class="form-note">Respondemos em até 2h úteis. Seus dados são protegidos pela LGPD.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" aria-label="Lixo Certo - Página Inicial">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                            <circle cx="16" cy="16" r="14" fill="#5276B8"/>
+                            <path d="M16 8V16L20 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 16L12 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 16L16 24" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Lixo Certo</span>
+                    </a>
+                    <p class="footer-tagline">Tecnologia a serviço da educação ambiental. Transformando escolas em referências de sustentabilidade.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin" class="icon"></i></a>
+                        <a href="#" aria-label="Instagram"><i data-lucide="instagram" class="icon"></i></a>
+                        <a href="#" aria-label="YouTube"><i data-lucide="youtube" class="icon"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i data-lucide="message-circle" class="icon"></i></a>
+                    </div>
+                </div>
+                <nav class="footer-nav">
+                    <div class="footer-col">
+                        <h4>Produto</h4>
+                        <ul>
+                            <li><a href="#features">Funcionalidades</a></li>
+                            <li><a href="#how-it-works">Como Funciona</a></li>
+                            <li><a href="#pricing">Planos e Preços</a></li>
+                            <li><a href="#">Especificações Técnicas</a></li>
+                            <li><a href="#">Acessibilidade</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Empresa</h4>
+                        <ul>
+                            <li><a href="#">Sobre Nós</a></li>
+                            <li><a href="#">Cases de Sucesso</a></li>
+                            <li><a href="#">Imprensa</a></li>
+                            <li><a href="#">Carreiras</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Suporte</h4>
+                        <ul>
+                            <li><a href="#">Central de Ajuda</a></li>
+                            <li><a href="#">Manuais e Tutoriais</a></li>
+                            <li><a href="#">Falar com Suporte</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Política de Privacidade</a></li>
+                            <li><a href="#">Termos de Uso</a></li>
+                            <li><a href="#">LGPD / DPO</a></li>
+                            <li><a href="#">Contrato Padrão</a></li>
+                            <li><a href="#">Certificações</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lixo Certo Tecnologia Educacional LTDA. CNPJ: 00.000.000/0001-00. Todos os direitos reservados.</p>
+                <p class="footer-cert">Certificada INMETRO • ISO 9001 • ISO 14001 • ABNT NBR 9050</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+        <div class="toast-content">
+            <i data-lucide="check-circle" class="icon"></i>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
