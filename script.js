@@ -8,9 +8,6 @@
         bin: '#binAnimation',
         binLid: '#binLid',
         sensorLight: '#sensorLight',
-        wasteItems: '.waste-item',
-        wasteDemo: '#wasteDemo',
-        demoHint: '.demo-hint',
         contactForm: '#contactForm',
         submitBtn: '#submitBtn',
         toast: '#toast',
@@ -26,8 +23,7 @@
             'orgânico': 'green',
             'papel': 'yellow',
             'metal': 'red'
-        },
-        currentDragItem: null
+        }
     };
 
     function $(selector, context = document) {
@@ -43,7 +39,6 @@
         initHeader();
         initMobileMenu();
         initBinAnimation();
-        initDragDrop();
         initContactForm();
         initSmoothScroll();
         initIntersectionObserver();
@@ -107,7 +102,6 @@
         const bin = $(SELECTORS.bin);
         const lid = $(SELECTORS.binLid);
         const sensorLight = $(SELECTORS.sensorLight);
-        const wasteItems = $$(SELECTORS.wasteItems);
 
         if (!bin || !lid || !sensorLight) return;
 
@@ -134,112 +128,6 @@
             const randomType = types[Math.floor(Math.random() * types.length)];
             triggerAnimation(randomType);
         });
-
-        wasteItems.forEach(item => {
-            item.addEventListener('click', () => {
-                triggerAnimation(item.dataset.type);
-            });
-        });
-    }
-
-    function initDragDrop() {
-        const wasteItems = $$(SELECTORS.wasteItems);
-        const wasteDemo = $(SELECTORS.wasteDemo);
-        const demoHint = $(SELECTORS.demoHint);
-        const bin = $(SELECTORS.bin);
-        const lid = $(SELECTORS.binLid);
-        const sensorLight = $(SELECTORS.sensorLight);
-
-        if (!wasteDemo || !bin) return;
-
-        wasteItems.forEach(item => {
-            item.setAttribute('draggable', 'true');
-            item.setAttribute('role', 'button');
-            item.setAttribute('tabindex', '0');
-            item.setAttribute('aria-label', `Arraste ${item.querySelector('span').textContent} para a lixeira`);
-
-            item.addEventListener('dragstart', handleDragStart);
-            item.addEventListener('dragend', handleDragEnd);
-            item.addEventListener('keydown', handleKeyDown);
-            item.addEventListener('click', () => triggerBinAnimation(item.dataset.type));
-        });
-
-        wasteDemo.addEventListener('dragover', handleDragOver);
-        wasteDemo.addEventListener('dragleave', handleDragLeave);
-        wasteDemo.addEventListener('drop', handleDrop);
-
-        function handleDragStart(e) {
-            STATE.currentDragItem = e.target.closest('.waste-item');
-            if (!STATE.currentDragItem) return;
-
-            STATE.currentDragItem.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/plain', STATE.currentDragItem.dataset.type);
-            demoHint.style.opacity = '0';
-        }
-
-        function handleDragEnd(e) {
-            const item = e.target.closest('.waste-item');
-            item?.classList.remove('dragging');
-            STATE.currentDragItem = null;
-            wasteDemo.classList.remove('drag-over');
-            demoHint.style.opacity = '1';
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            wasteDemo.classList.add('drag-over');
-        }
-
-        function handleDragLeave(e) {
-            if (!wasteDemo.contains(e.relatedTarget)) {
-                wasteDemo.classList.remove('drag-over');
-            }
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            wasteDemo.classList.remove('drag-over');
-
-            const wasteType = e.dataTransfer.getData('text/plain');
-            if (wasteType) {
-                triggerBinAnimation(wasteType);
-                showToast(`${getWasteLabel(wasteType)} depositado corretamente!`, 'success');
-            }
-        }
-
-        function handleKeyDown(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                triggerBinAnimation(e.currentTarget.dataset.type);
-            }
-        }
-
-        function triggerBinAnimation(wasteType) {
-            const correctColor = STATE.correctMatches[wasteType];
-            const targetStrip = $(`.color-strip.${correctColor}`, bin);
-
-            sensorLight.classList.add('active');
-            lid.classList.add('open');
-            targetStrip?.classList.add('highlight');
-
-            setTimeout(() => {
-                lid.classList.remove('open');
-                sensorLight.classList.remove('active');
-                targetStrip?.classList.remove('highlight');
-            }, 2000);
-        }
-
-        function getWasteLabel(type) {
-            const labels = {
-                'plástico': 'Garrafa PET',
-                'orgânico': 'Casca de Banana',
-                'papel': 'Papel',
-                'metal': 'Lata de Alumínio'
-            };
-            return labels[type] || type;
-        }
     }
 
     function initContactForm() {
@@ -255,11 +143,26 @@
 
             setLoading(submitBtn, true);
 
-            await simulateSubmission();
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
 
-            setLoading(submitBtn, false);
-            showToast('Solicitação enviada! Entraremos em contato em até 2h úteis.', 'success');
-            form.reset();
+                if (response.ok) {
+                    showToast('Solicitação enviada! Entraremos em contato em até 2 dias úteis.', 'success');
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    throw new Error(data.error || 'Erro ao enviar formulário');
+                }
+            } catch (error) {
+                showToast('Erro ao enviar. Tente novamente ou entre em contato diretamente.', 'error');
+            } finally {
+                setLoading(submitBtn, false);
+            }
         });
 
         $$('input, select, textarea', form).forEach(field => {
@@ -372,14 +275,17 @@
     function showToast(message, type = 'success') {
         const toast = $(SELECTORS.toast);
         const messageEl = $('.toast-message', toast);
+        const contentEl = $('.toast-content', toast);
 
         if (!toast || !messageEl) return;
 
         messageEl.textContent = message;
+        contentEl.classList.toggle('error', type === 'error');
         toast.classList.add('show');
 
         setTimeout(() => {
             toast.classList.remove('show');
+            contentEl.classList.remove('error');
         }, 4000);
     }
 

@@ -357,31 +357,19 @@ input, select, textarea {
 .bin-label { display: flex; align-items: center; justify-content: center; gap: 8px; padding-top: 8px; border-top: 1px solid var(--color-border-light); font-weight: 600; color: var(--color-text-light); }
 .bin-base { width: 240px; height: 40px; background: var(--color-text); border-radius: 0 0 var(--radius-xl) var(--radius-xl); box-shadow: var(--shadow-md); }
 
-.waste-demo { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-.waste-item {
+.bin-image-placeholder {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
-    padding: 16px 20px;
-    background: var(--color-bg-white);
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    cursor: grab;
-    transition: all var(--transition-fast);
-    user-select: none;
+    margin-top: 24px;
 }
-.waste-item:hover { border-color: var(--color-primary); box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.waste-item:active { cursor: grabbing; }
-.waste-item.dragging { opacity: 0.5; transform: scale(1.05); box-shadow: var(--shadow-xl); }
-.waste-item .icon { width: 28px; height: 28px; stroke-width: 2; }
-.waste-item.plastic .icon { color: var(--color-primary); }
-.waste-item.organic .icon { color: var(--color-green); }
-.waste-item.paper .icon { color: var(--color-yellow-dark); }
-.waste-item.metal .icon { color: var(--color-red); }
-.waste-item span { font-size: 12px; font-weight: 500; color: var(--color-text); text-align: center; }
-
-.demo-hint { display: flex; align-items: center; gap: 8px; color: var(--color-text-muted); font-size: 14px; padding-top: 8px; }
+.bin-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 32px rgba(30, 41, 59, 0.15));
+}
 
 .section-header { text-align: center; margin-bottom: 48px; }
 .section-tag {
@@ -552,6 +540,8 @@ input, select, textarea {
 .toast.show { transform: translateX(0); }
 .toast-content { display: flex; align-items: center; gap: 12px; padding: 16px 24px; background: var(--color-text); color: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); }
 .toast-content .icon { width: 24px; height: 24px; color: var(--color-green); flex-shrink: 0; }
+.toast-content.error { background: var(--color-red); }
+.toast-content.error .icon { color: white; }
 
 @media (max-width: 1024px) {
     .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
